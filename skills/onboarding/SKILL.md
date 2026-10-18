@@ -100,6 +100,8 @@ After the third tour confirmation, celebrate briefly: the onboarding is complete
 - Invite them to open the Reports section in the dashboard sidebar. Say it is just to take a look: running a report spends credits, so there is no need to run one yet.
 - Sample mode: encourage them to wire up their real AI agent before spending more credits, since reports are most useful on real conversations. Offer to do it now by running this skill's real integration path (Step 3b). Tell them "To remove the samples later, use Remove sample conversations in the dashboard."
 - Real mode: name the branch and say the changes are uncommitted and ready for review. Encourage them to let real traffic flow before running reports.
+- Key hygiene, always: the user shared an API key with you during this session, so encourage them to rotate it. At https://app.conversationexplorer.com/settings/api-keys they remove the key used here and create a new one for their real integration. Offer to update the key in the env file you wrote to (never print it).
+- Cleanup, only if the user wants to remove the demo data: first instruct them to remove the API key at the same page (this step is always part of cleanup). Then encourage them to remove the workspace holding the demo data in Settings, Workspaces. Say that deleting a workspace deletes everything in it, so it is only right when the workspace was created just for this trial; otherwise use Remove sample conversations in the dashboard. Do not delete anything yourself.
 - Last, offer to connect their editor to the management MCP with `claude mcp add --transport http conversation-explorer https://mcp.conversationexplorer.com/management`. Then stop.
 
 ## Redirecting Drift
