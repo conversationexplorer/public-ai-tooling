@@ -1,8 +1,15 @@
 # Conversation Explorer ingest API
 
-Base URL: `https://api.conversationexplorer.com`. If the environment variable `CONVERSATION_EXPLORER_API_BASE` is set, use it instead. Every path below starts with `/api/v1`.
+## Resolve the settings once
 
-Authentication on every call: `Authorization: Bearer <pk_ key>`. Read the key from `CONVERSATION_EXPLORER_API_KEY`. Never print it.
+At the start, resolve two values and reuse exactly these values for every call, including the key check, sending, and polling the ingestion status. Never fall back to a default again later.
+
+- Base URL: the `CONVERSATION_EXPLORER_API_BASE` value if it is set in the environment or in `.env`, otherwise `https://api.conversationexplorer.com`.
+- Key: the `CONVERSATION_EXPLORER_API_KEY` value from the environment or `.env`.
+
+If you write helper scripts, have them read both values from `.env` the same way. A key only works on the server that issued it: polling a different host than the one you sent to returns 401 or 403 even though the data arrived.
+
+Every path below starts with `/api/v1`. Authentication on every call: `Authorization: Bearer <pk_ key>`. Never print the key.
 
 The full contract is the public OpenAPI file at `https://api.conversationexplorer.com/openapi.public.yaml`. Use it if anything here seems out of date.
 

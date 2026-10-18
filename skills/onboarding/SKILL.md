@@ -28,6 +28,7 @@ Write plainly. Say only what you did or are about to do.
 - Enforce sequence. Do not advance until the current stage is done.
 - Work silently between decision points. The user may have walked away and should come back to a finished state.
 - Speak only when you need the user: the opening, a real decision, a manual step you cannot do for them, or completion. Lead with the outcome.
+- Resolve the API base URL and key once, as described in `references/api.md`, and use the same values for every call including polling.
 - Never print, log, echo, or hardcode the API key. It lives only in `.env` (gitignored) or the process environment, read as `CONVERSATION_EXPLORER_API_KEY`.
 - Never commit. In real mode, work on a branch and leave changes uncommitted for the user to review.
 - Ask before adding any dependency. Prefer the HTTP client the project already uses, or the platform's built-in one.
@@ -97,7 +98,7 @@ If the user asks for something unrelated mid-flow, answer briefly, then return t
 - HTTP 429 on ingest: back off and retry a few times with growing pauses. If it persists, treat it as the out of credits case above.
 - HTTP 400 on ingest: the response body names the field. Fix your payload, never the user's data.
 - Windows or restricted shells: write the temp payloads with the language runtime you already use for the project instead of shell heredocs.
-- The user is on a self hosted or local instance: they can set `CONVERSATION_EXPLORER_API_BASE` (default `https://api.conversationexplorer.com`). Use it for every call.
+- The user is on a self hosted or local instance: they set `CONVERSATION_EXPLORER_API_BASE` (default `https://api.conversationexplorer.com`). A 401 or 403 when polling usually means you are polling a different host than you sent to.
 
 ## References
 
