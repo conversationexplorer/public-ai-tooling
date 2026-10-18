@@ -112,7 +112,7 @@ After the third tour confirmation, celebrate briefly: the onboarding is complete
 - Real mode: name the branch and say the changes are uncommitted and ready for review. Encourage them to let real traffic flow before running reports.
 - Key hygiene, always: the user shared an API key with you during this session, so encourage them to rotate it. At https://app.conversationexplorer.com/settings/api-keys they remove the key used here and create a new one for their real integration. Offer to update the key in the env file you wrote to (never print it).
 - Cleanup, only if the user wants to remove the demo data: first instruct them to remove the API key at the same page (this step is always part of cleanup). Then encourage them to remove the workspace holding the demo data in Settings, Workspaces. Say that deleting a workspace deletes everything in it, so it is only right when the workspace was created just for this trial; otherwise use Remove sample conversations in the dashboard. Do not delete anything yourself.
-- MCP, important: invite them to connect their editor to the management MCP so their AI assistant can list conversations and read reports without opening the dashboard. Give the command `claude mcp add --transport http conversation-explorer https://mcp.conversationexplorer.com/management` (for other clients, the URL `https://mcp.conversationexplorer.com/management`). It is read-only. Suggest a first try such as "list my latest conversations" or "show my analysis runs". Do not run the command for them. Then stop.
+- MCP, important: invite them to connect their editor to the management MCP so their AI assistant can list conversations and read reports without opening the dashboard. Do not paste instructions from memory. Give them this plain text page, a few lines, and read it yourself only if they ask for help: https://raw.githubusercontent.com/conversationexplorer/public-ai-tooling/main/skills/onboarding/references/mcp.md. Do not run the install for them. Then stop.
 
 ## Redirecting Drift
 
@@ -130,4 +130,5 @@ If the user asks for something unrelated mid-flow, answer briefly, then return t
 
 - `references/api.md`: base URL, auth, the three calls, status values, key check.
 - `references/sample-conversations.md`: the questions to ask and how to generate the 5 samples.
+- `references/mcp.md`: plain text page for connecting the management MCP.
 - `references/integration-patterns.md`: finding the hook point, and ready snippets for Node and Python.
