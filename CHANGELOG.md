@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- Added a guided tour after the first message lands: conversations, then usage, then billing, each gated on the user's confirmation.
+- Added a guided tour after the first message lands: conversations, then usage, then billing, each gated on the user's confirmation, then a celebratory wrap-up that points to Reports and encourages a real integration before spending more credits.
 
 ## 0.1.0
 

@@ -95,9 +95,12 @@ Do not read usage or balance yourself; there is no endpoint for it. After the th
 
 ## Wrap-up
 
-- Sample mode: tell the user "To remove these later, use Remove sample conversations in the dashboard."
-- Real mode: name the branch and say the changes are uncommitted and ready for review.
-- Offer next steps, one line each: run a report on the new conversations (it costs credits, so only if they want it), or connect their editor to the management MCP with `claude mcp add --transport http conversation-explorer https://mcp.conversationexplorer.com/management`. Then stop.
+After the third tour confirmation, celebrate briefly: the onboarding is complete, the first message arrived and they know where conversations, usage and billing live.
+
+- Invite them to open the Reports section in the dashboard sidebar. Say it is just to take a look: running a report spends credits, so there is no need to run one yet.
+- Sample mode: encourage them to wire up their real AI agent before spending more credits, since reports are most useful on real conversations. Offer to do it now by running this skill's real integration path (Step 3b). Tell them "To remove the samples later, use Remove sample conversations in the dashboard."
+- Real mode: name the branch and say the changes are uncommitted and ready for review. Encourage them to let real traffic flow before running reports.
+- Last, offer to connect their editor to the management MCP with `claude mcp add --transport http conversation-explorer https://mcp.conversationexplorer.com/management`. Then stop.
 
 ## Redirecting Drift
 
