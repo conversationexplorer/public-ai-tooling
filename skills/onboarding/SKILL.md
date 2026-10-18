@@ -54,9 +54,9 @@ Tell the user to open https://app.conversationexplorer.com/settings/api-keys (or
 - Paste it in the chat. You write it to `.env` yourself and never repeat it.
 - Put `CONVERSATION_EXPLORER_API_KEY=pk_...` in a gitignored `.env` themselves.
 
-When you write `.env`, make sure `.env` is in `.gitignore` first (add it if missing). Never write the key anywhere else.
+Before writing the key to a file, check the file is safe: run `git ls-files --error-unmatch .env`. If `.env` is already tracked by git, do NOT write the key there (ignoring a tracked file does not stop it from being committed). Write it to `.env.local` instead, make sure `.env.local` is in `.gitignore`, and tell the user in one sentence why. If `.env` is not tracked, make sure it is in `.gitignore` (add it if missing) and write the key there. Never write the key anywhere else.
 
-Verify the key before going on, following `references/api.md` ("Key check"): a 404 on the probe means the key is valid, a 401 means it is not. Report the status you got. If it is not valid, ask for the key again. Any other status: stop and show it.
+Verify the key before going on, following `references/api.md` ("Key check"), without ever putting the key on a command line you display (load it from `.env` inside the command): a 404 on the probe means the key is valid, a 401 means it is not. Report the status you got. If it is not valid, ask for the key again. Any other status: stop and show it.
 
 ## Step 2: Choose a path
 
@@ -79,7 +79,7 @@ Poll the ingestion status described in `references/api.md` until it is `DONE`. H
 - `PENDING` or `PROCESSING`: keep polling, up to 2 minutes.
 - `BLOCKED` on a brand new account: free credits are added within about a minute of signup and the message resumes on its own. Wait and poll for up to 2 more minutes before saying anything else.
 - `BLOCKED` after that: say "Ingestion is paused because the workspace is out of credits. Add credits at https://app.conversationexplorer.com/settings/billing and it resumes on its own." Do not retry in a loop.
-- `FAILED`: show the error text from the status response and stop.
+- `FAILED`: say plainly that this message could not be stored, show the HTTP status you got from the status call, and stop. Do not invent a reason.
 
 When `DONE`: "Your first message is in. Open the dashboard and you will see it, with First message received checked."
 

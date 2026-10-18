@@ -4,10 +4,10 @@
 
 At the start, resolve two values and reuse exactly these values for every call, including the key check, sending, and polling the ingestion status. Never fall back to a default again later.
 
-- Base URL: the `CONVERSATION_EXPLORER_API_BASE` value if it is set in the environment or in `.env`, otherwise `https://api.conversationexplorer.com`.
-- Key: the `CONVERSATION_EXPLORER_API_KEY` value from the environment or `.env`.
+- Base URL: the `CONVERSATION_EXPLORER_API_BASE` value if it is set in the environment, `.env` or `.env.local`, otherwise `https://api.conversationexplorer.com`.
+- Key: the `CONVERSATION_EXPLORER_API_KEY` value from the environment, `.env` or `.env.local`.
 
-If you write helper scripts, have them read both values from `.env` the same way. A key only works on the server that issued it: polling a different host than the one you sent to returns 401 or 403 even though the data arrived.
+If you write helper scripts, have them read both values from both files the same way. A key only works on the server that issued it: polling a different host than the one you sent to returns 401 or 403 even though the data arrived.
 
 Every path below starts with `/api/v1`. Authentication on every call: `Authorization: Bearer <pk_ key>`. Never print the key.
 
@@ -16,6 +16,13 @@ The full contract is the public OpenAPI file at `https://api.conversationexplore
 ## Key check
 
 `GET /api/v1/conversations/__probe__`
+
+Never type the key into the command. Load it from the file inside the command so it is not echoed:
+
+```bash
+set -a; [ -f .env ] && . ./.env; [ -f .env.local ] && . ./.env.local; set +a   # load both files: settings may live in either
+curl -s -o /dev/null -w "%{http_code}\n" -H "Authorization: Bearer $CONVERSATION_EXPLORER_API_KEY" "${CONVERSATION_EXPLORER_API_BASE:-https://api.conversationexplorer.com}/api/v1/conversations/__probe__"
+```
 
 - `404`: the key is valid (the conversation just does not exist). Continue.
 - `401`: the key is not valid. Ask the user for a fresh one.
@@ -67,7 +74,7 @@ All or nothing: if one message is invalid the whole call is rejected with `400` 
 - `PENDING`, `PROCESSING`: still on its way.
 - `DONE`: stored.
 - `BLOCKED`: paused because the workspace is out of credits. It resumes by itself once credits are added.
-- `FAILED`: gave up. The response carries an error message.
+- `FAILED`: gave up. The response has no error text; report only the status.
 
 ## Cost
 

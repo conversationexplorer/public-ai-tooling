@@ -26,17 +26,21 @@ Use an id the app already has for the whole conversation: a session id, thread i
 
 ```js
 const BASE = process.env.CONVERSATION_EXPLORER_API_BASE ?? 'https://api.conversationexplorer.com'
-const headers = {
-  Authorization: `Bearer ${process.env.CONVERSATION_EXPLORER_API_KEY}`,
-  'Content-Type': 'application/json',
-}
+const KEY = process.env.CONVERSATION_EXPLORER_API_KEY
+const headers = { Authorization: `Bearer ${KEY}`, 'Content-Type': 'application/json' }
+const conversations = new Map() // externalId -> conversationId, so each turn is one request
 
 async function ensureConversation(externalId) {
+  if (conversations.has(externalId)) return conversations.get(externalId)
   const res = await fetch(`${BASE}/api/v1/conversations`, { method: 'POST', headers, body: JSON.stringify({ externalId }) })
-  return (await res.json()).conversationId
+  if (!res.ok) throw new Error(`status ${res.status}`)
+  const { conversationId } = await res.json()
+  conversations.set(externalId, conversationId)
+  return conversationId
 }
 
 export function recordTurn({ externalId, channelName, channelUserId, role, content }) {
+  if (!KEY) return // not configured here: do nothing, never break the app
   // fire and forget: never await this from the agent's request path
   ensureConversation(externalId)
     .then((id) =>
@@ -56,7 +60,8 @@ export function recordTurn({ externalId, channelName, channelUserId, role, conte
 import os, threading, datetime, requests
 
 BASE = os.environ.get("CONVERSATION_EXPLORER_API_BASE", "https://api.conversationexplorer.com")
-HEADERS = {"Authorization": f"Bearer {os.environ['CONVERSATION_EXPLORER_API_KEY']}"}
+KEY = os.environ.get("CONVERSATION_EXPLORER_API_KEY")  # never index os.environ directly: a missing key must not break import
+HEADERS = {"Authorization": f"Bearer {KEY}"}
 
 def _send(external_id, channel_name, channel_user_id, role, content):
     try:
@@ -78,6 +83,8 @@ def _send(external_id, channel_name, channel_user_id, role, content):
         print("conversation-explorer: send failed", type(err).__name__)
 
 def record_turn(*args):
+    if not KEY:
+        return  # not configured here: do nothing
     threading.Thread(target=_send, args=args, daemon=True).start()
 ```
 
