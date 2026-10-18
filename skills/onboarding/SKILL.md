@@ -64,7 +64,7 @@ Ask once: "Wire up your real agent now, or generate sample conversations for you
 
 ## Step 3a: Sample conversations
 
-Follow `references/sample-conversations.md`. Hard limit: 5 conversations. Before sending, tell the user the approximate credit cost (messages times 5). After sending, point them to https://app.conversationexplorer.com/settings/usage to see the credits used. Do not try to read usage or balance yourself; there is no endpoint for it.
+Follow `references/sample-conversations.md`. Hard limit: 5 conversations. Before sending, tell the user the approximate credit cost (messages times 5). Do not try to read usage or balance yourself; there is no endpoint for it. The usage and billing pages are covered by the tour in Step 5.
 
 ## Step 3b: Real integration
 
@@ -81,10 +81,21 @@ Poll the ingestion status described in `references/api.md` until it is `DONE`. H
 - `BLOCKED` after that: say "Ingestion is paused because the workspace is out of credits. Add credits at https://app.conversationexplorer.com/settings/billing and it resumes on its own." Do not retry in a loop.
 - `FAILED`: say plainly that this message could not be stored, show the HTTP status you got from the status call, and stop. Do not invent a reason.
 
-When `DONE`: "Your first message is in. Open the dashboard and you will see it, with First message received checked."
+When `DONE`, say "Your first message is in." and go to Step 5.
+
+## Step 5: Guided tour
+
+Three stops, in this order. At each stop give one short instruction with the link, then ask a yes or no question and wait for the answer. Never present the next stop, or run any other action, until the user confirms the current one. If they answer no, ask what they see, help briefly, and ask again. If they want to stop, stop.
+
+1. Conversations: "Open https://app.conversationexplorer.com, pick your workspace and open the conversations that just arrived. Have you checked them? (yes / no)" In sample mode add that the titles start with the business they described. In real mode say to look for the conversation from the turn you sent.
+2. Usage: "Now open https://app.conversationexplorer.com/settings/usage to see the credits these messages used. Have you checked it? (yes / no)"
+3. Billing: "Last stop: https://app.conversationexplorer.com/settings/billing shows your plan and balance, and where to add credits. Have you checked it? (yes / no)"
+
+Do not read usage or balance yourself; there is no endpoint for it. After the third confirmation, go to the wrap-up.
 
 ## Wrap-up
 
+- Sample mode: tell the user "To remove these later, use Remove sample conversations in the dashboard."
 - Real mode: name the branch and say the changes are uncommitted and ready for review.
 - Offer next steps, one line each: run a report on the new conversations (it costs credits, so only if they want it), or connect their editor to the management MCP with `claude mcp add --transport http conversation-explorer https://mcp.conversationexplorer.com/management`. Then stop.
 

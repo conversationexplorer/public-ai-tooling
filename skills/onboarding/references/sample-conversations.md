@@ -31,4 +31,4 @@ Hard limit: 5. Never generate more, even if asked. Say it plainly: "Samples are 
 4. Delete the temp files when done.
 5. Print a table of 5 rows (title, turns, outcome) and nothing else.
 
-Then go to the confirm step in `SKILL.md`. Afterwards tell the user: "To remove these later, use Remove sample conversations in the dashboard." and point them to https://app.conversationexplorer.com/settings/usage to see the credits used.
+Then go to the confirm step in `SKILL.md` and the guided tour that follows it. In the wrap-up tell the user: "To remove these later, use Remove sample conversations in the dashboard."
