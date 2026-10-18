@@ -64,7 +64,7 @@ Ask once: "Wire up your real agent now, or generate sample conversations for you
 
 ## Step 3a: Sample conversations
 
-Follow `references/sample-conversations.md`. Hard limit: 5 conversations. Before sending, tell the user the approximate credit cost (messages times 5). After sending, point them to https://app.conversationexplorer.com/settings/billing to check their balance. Do not try to read the balance yourself; there is no endpoint for it.
+Follow `references/sample-conversations.md`. Hard limit: 5 conversations. Before sending, tell the user the approximate credit cost (messages times 5). After sending, point them to https://app.conversationexplorer.com/settings/usage to see the credits used. Do not try to read usage or balance yourself; there is no endpoint for it.
 
 ## Step 3b: Real integration
 
