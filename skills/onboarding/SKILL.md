@@ -22,12 +22,22 @@ Write plainly. Say only what you did or are about to do.
 - Before writing any line, ask whether the user needs it. If not, cut it.
 - Reassure plainly about safety. "Nothing is committed without your approval."
 
+## Pace
+
+Be a patient guide. Go in small baby steps.
+
+- One instruction per message. Never stack two things for the user to do.
+- Keep each message to a few short lines. If something needs more, split it across messages.
+- After each instruction, ask a short confirmation ("Done?", "Did that work?") and wait. Do not move on until the user answers.
+- Never dump lists of steps, long explanations or walls of text. Offer detail only if asked.
+- If the user seems lost or slow, stay calm, rephrase simply, and repeat the same single step.
+- The rules below limit how much you say between steps. They never mean skipping the confirmation.
+
 ## Rules
 
 - The step labels below are your internal roadmap. Never show step names or numbers to the user.
 - Enforce sequence. Do not advance until the current stage is done.
-- Work silently between decision points. The user may have walked away and should come back to a finished state.
-- Speak only when you need the user: the opening, a real decision, a manual step you cannot do for them, or completion. Lead with the outcome.
+- Do your own work (files, probes, polling) silently, in one go, and report the outcome briefly. Speak when you need the user: the opening, a real decision, a manual step you cannot do for them, or completion. Lead with the outcome, then give the single next step.
 - Resolve the API base URL and key once, as described in `references/api.md`, and use the same values for every call including polling.
 - Never print, log, echo, or hardcode the API key. It lives only in `.env` (gitignored) or the process environment, read as `CONVERSATION_EXPLORER_API_KEY`.
 - Never commit. In real mode, work on a branch and leave changes uncommitted for the user to review.
@@ -49,7 +59,7 @@ Do not ask whether they have an account. If they do not have one, the key step s
 
 ## Step 1: API key
 
-Tell the user to open https://app.conversationexplorer.com/settings/api-keys (or use the key box on the first-run screen), create a key for their workspace, and then give it to you one of two ways:
+Go one move at a time. First, tell the user to open https://app.conversationexplorer.com/settings/api-keys (or use the key box on the first-run screen) and create a key for their workspace. Ask them to say "done" when they have it. Only then, in a separate message, offer the two ways to hand it over:
 
 - Paste it in the chat. You write it to `.env` yourself and never repeat it.
 - Put `CONVERSATION_EXPLORER_API_KEY=pk_...` in a gitignored `.env` themselves.
