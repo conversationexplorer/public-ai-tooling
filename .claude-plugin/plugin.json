@@ -1,0 +1,11 @@
+{
+  "name": "conversation-explorer",
+  "version": "0.1.0",
+  "description": "Conversation Explorer agent skills: onboard your agent's conversations into the dashboard",
+  "author": { "name": "Conversation Explorer" },
+  "homepage": "https://conversationexplorer.com",
+  "repository": "https://github.com/conversationexplorer/public-ai-tooling",
+  "license": "Apache-2.0",
+  "keywords": ["conversation-explorer", "conversations", "onboarding", "ingestion", "agents"],
+  "skills": ["./skills/onboarding"]
+}

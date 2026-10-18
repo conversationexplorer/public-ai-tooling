@@ -1,0 +1,12 @@
+{
+  "name": "conversation-explorer-ai-tooling",
+  "description": "Official Conversation Explorer plugins for Claude Code",
+  "owner": { "name": "Conversation Explorer", "url": "https://conversationexplorer.com" },
+  "plugins": [
+    {
+      "name": "conversation-explorer",
+      "description": "Conversation Explorer agent skills: onboard your agent's conversations into the dashboard",
+      "source": "."
+    }
+  ]
+}

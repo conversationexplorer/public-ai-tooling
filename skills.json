@@ -1,0 +1,13 @@
+{
+  "skills": [
+    {
+      "name": "onboarding",
+      "description": "Scripted onboarding for Conversation Explorer: API key from the user, then sample conversations for their business or a real integration, verified by the first message landing in the dashboard. Use when adding Conversation Explorer, sending conversations or messages to it, integrating its API, or 'onboard me'.",
+      "path": "skills/onboarding",
+      "version": "0.1.0",
+      "license": "Apache-2.0",
+      "compatibility": "Requires a coding agent with file and shell access, network access to https://api.conversationexplorer.com, and a Conversation Explorer account.",
+      "tags": ["conversation-explorer", "onboarding", "ingestion", "api", "getting-started", "setup"]
+    }
+  ]
+}

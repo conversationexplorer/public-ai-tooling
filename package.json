@@ -1,0 +1,10 @@
+{
+  "name": "@conversation-explorer/ai-tooling",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Agent skills for Conversation Explorer",
+  "license": "Apache-2.0",
+  "scripts": {
+    "validate": "node scripts/validate.mjs"
+  }
+}
